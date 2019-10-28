@@ -2,15 +2,14 @@ FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
 WORKDIR /app
 
 # copy csproj and restore as distinct layers
-COPY webapi/*.csproj ./webapi/
+COPY webapi/*.csproj ./
 RUN dotnet restore
 
 # copy everything else and build app
-COPY webapi/. ./webapi/
-WORKDIR /app/webapi
+COPY webapi/. ./
 RUN dotnet publish -c Release -o out
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/webapi/out ./
+COPY --from=build /app/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
