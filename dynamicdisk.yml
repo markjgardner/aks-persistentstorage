@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: persistent-storage
+  name: azuredisk
 spec:
   accessModes:
   - ReadWriteOnce
@@ -36,7 +36,7 @@ spec:
       volumes:
         - name: volume
           persistentVolumeClaim:
-            claimName: persistent-storage
+            claimName: azuredisk
 ---
 apiVersion: v1
 kind: Service

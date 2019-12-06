@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: persistent-storage
+  name: azuredisk
 spec:
   accessModes:
   - ReadWriteOnce
@@ -13,7 +13,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: webapi-ddliveness
+  name: webapi-dynamicdiskprobe
 spec:
   replicas: 1
   selector:
@@ -43,7 +43,7 @@ spec:
       volumes:
         - name: volume
           persistentVolumeClaim:
-            claimName: persistent-storage
+            claimName: azuredisk
 ---
 apiVersion: v1
 kind: Service
